@@ -65,6 +65,14 @@ def lines_to_nums(array):
     print(num_input)
     return num_input
 
+def line_to_words(array):
+    print("splitting line to its under 'words'")
+    word_lines=[]
+    for line in array:
+        word_lines.append(line.split(" "))
+
+    return word_lines
+
 #gets the input line by line
 def get_input(file_name):
     input=[]

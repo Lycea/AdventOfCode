@@ -78,7 +78,7 @@ def get_input(file_name):
     input=[]
     print("getting the input from the named file...")
     with open(file_name,"r") as fh:
-        input = fh.readlines()
+        input = [x.strip() for x in fh.readlines()]
 
 
     return input

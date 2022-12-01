@@ -1,3 +1,6 @@
+import sys
+sys.path.append("../../")
+
 import s1
 import s2
 

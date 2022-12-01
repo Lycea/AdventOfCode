@@ -7,7 +7,7 @@ input=""
 
 def run():
     global input
-    print("s1")
-    input=get_input("input.input")
+    print("\n\ns1")
+    input=Input()
 
 

@@ -5,5 +5,5 @@ input=""
 
 def run():
     global input
-    print("s2")
-    input=get_input("input.input")
+    print("\n\ns2")
+    input=Input()

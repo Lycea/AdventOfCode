@@ -77,8 +77,47 @@ def line_to_words(array):
 def get_input(file_name):
     input=[]
     #print("getting the input from the named file...")
-    with open(file_name,"r") as fh:
-        input = [x.strip() for x in fh.readlines()]
-
+    if os.path.exists(file_name):
+        with open(file_name,"r") as fh:
+            input = [x.strip() for x in fh.readlines()]
+    else:
+        print("WARNING: File could not be found")
 
     return input
+
+
+
+class Input():
+    def __init__(self,real_input=False):
+        if real_input:
+            self._data = get_input("input.input")
+        else:
+            self._data = get_input("sample.input")
+    
+    def get(self):
+        return self._data
+
+    def set(self, array):
+        self._data = array
+        return self
+
+    def to_word(self):
+        self._data = line_to_words(self._data)
+        return self
+   
+    def to_number(self):
+        self._data = lines_to_nums(self._data)
+        return self
+    
+    def strip(self):
+        self._data = remove_spaces(self._data)
+        return self
+
+    def split_chunks(self):
+        self._data = parse_by_next_new_line_array(self._data)
+        return self
+
+if __name__ == "__main__":
+    print( Input().to_word().get() )
+
+

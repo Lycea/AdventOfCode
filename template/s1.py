@@ -4,10 +4,17 @@ input=""
 
 
 
-
-def run():
+def parse():
     global input
-    print("\n\ns1")
     input=Input()
+    
+def do():
+    parse()
+
+def run():  
+    print("\n\ns1")
+    do()
+
+    
 
 

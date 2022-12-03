@@ -3,7 +3,13 @@ from helper.helpers import  *
 input=""
 
 
-def run():
+def parse():
     global input
-    print("\n\ns2")
     input=Input()
+    
+def do():
+    parse()
+
+def run():  
+    print("\n\ns2")
+    do()

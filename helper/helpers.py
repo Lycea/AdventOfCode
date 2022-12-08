@@ -46,6 +46,12 @@ def parse_by_nex_new_line(array):
     #print("\n")
     return ret_items
 
+def split_array_line_by(array,splitter):
+    ret_items =[]
+    
+    for item in array:
+        ret_items.append( item.split(splitter) )
+    return ret_items
 
 def remove_spaces(array):
     idx = 0
@@ -115,6 +121,10 @@ class Input():
 
     def split_chunks(self):
         self._data = parse_by_next_new_line_array(self._data)
+        return self
+    
+    def split_by(self, splitter):
+        self._data = split_array_line_by(self._data, splitter)
         return self
 
 if __name__ == "__main__":

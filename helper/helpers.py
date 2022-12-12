@@ -1,7 +1,7 @@
 import os
 import io
 
-def parse_by_next_new_line_array(array):
+def parse_by_next_new_line_array(array,stripped):
     stack =[]
     ret_items=[]
     #print(array)
@@ -13,7 +13,10 @@ def parse_by_next_new_line_array(array):
             ret_items.append(stack)
             stack = []
         else:
-            stack.append(item.strip())
+            if stripped:
+                stack.append(item.strip())
+            else:
+                stack.append(item)
 
     if len(stack)!= 0:
         ret_items.append(stack)
@@ -24,7 +27,7 @@ def parse_by_next_new_line_array(array):
     return ret_items
 
 
-def parse_by_nex_new_line(array):
+def parse_by_nex_new_line(array,stripped):
     stack =""
     ret_items=[]
     #print(array)
@@ -36,7 +39,10 @@ def parse_by_nex_new_line(array):
             ret_items.append(stack)
             stack = ""
         else:
-            stack+=" "+item.strip()
+            if stripped:
+                stack+=" "+item.strip()
+            else:
+                stack+=" "+item
 
     if len(stack)!= 0:
         ret_items.append(stack)
@@ -80,12 +86,15 @@ def line_to_words(array):
     return word_lines
 
 #gets the input line by line
-def get_input(file_name):
+def get_input(file_name,stripped):
     input=[]
     #print("getting the input from the named file...")
     if os.path.exists(file_name):
         with open(file_name,"r") as fh:
-            input = [x.strip() for x in fh.readlines()]
+            if stripped:
+                input = [x.strip() for x in fh.readlines()]
+            else:
+                input = fh.readlines()
     else:
         print("WARNING: File could not be found")
 
@@ -94,11 +103,14 @@ def get_input(file_name):
 
 
 class Input():
-    def __init__(self,real_input=False):
+    def __init__(self,real_input=False,stripped=True):
         if real_input:
-            self._data = get_input("input.input")
+            self._data = get_input("input.input",stripped)
         else:
-            self._data = get_input("sample.input")
+            self._data = get_input("sample.input",stripped)
+
+        self.do_strip = stripped
+        self.start_data= self._data.copy()
     
     def get(self):
         return self._data
@@ -120,7 +132,7 @@ class Input():
         return self
 
     def split_chunks(self):
-        self._data = parse_by_next_new_line_array(self._data)
+        self._data = parse_by_next_new_line_array(self._data,self.do_strip)
         return self
     
     def split_by(self, splitter):

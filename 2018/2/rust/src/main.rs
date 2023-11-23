@@ -10,6 +10,6 @@ fn main() {
     //let num = helper::add(1,3);
     //println!("{num}");
     
-  //  s1::run();
+    s1::run();
     s2::run();
 }

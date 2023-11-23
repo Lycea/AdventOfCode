@@ -1,55 +1,47 @@
-use std::collections::HashMap;
-
+use rust_helper::input_file;
+use std::collections::{vec_deque, VecDeque};
+use std::str::Chars;
+use std::vec;
 pub fn run(  )
 {
     println!("\n\n--------");
     println!("p2!!(is still p1)");
-    let input_text = rust_helper::read_lines("src/input.txt");
+    let input_text = rust_helper::read_lines(&input_file!());
 
-    let mut twice_count = 0;
-    let mut trice_count = 0;
+    let mut comp_list =  VecDeque::from(input_text.clone());
 
-    for line in input_text.iter()
+    'outer: for line in input_text.iter()
     {
-        let mut var_count:HashMap<char,i32> = HashMap::new() ;
-        println!("{}",line);
-        for letter in line.chars()
-        {
-            if var_count.contains_key(&letter) == true
-            {
-                // println!("  Multi: {letter}");
-                var_count.insert(letter,var_count[&letter] + 1);
-            }
-            else
-            {
-                var_count.insert(letter, 1);
-            }
-        }
 
-        let mut two_found = false;
-        let mut three_found = false;
-
-        for (letter,count) in var_count.iter()
+        comp_list.pop_front();
+        for comp_line in comp_list.iter()
         {
-            if *count == 2 && ! two_found
+            let mut same_chars : Vec<char> = Vec::new();
+            let mut differences = 0;
+            let mut comp_chars = comp_line.chars();
+            let mut cnt = 0;
+            for letter in line.chars()
             {
-                println!("  TWO {letter}");
-                twice_count+=1;
-                two_found = true;
+                if letter != comp_chars.nth(0).unwrap()
+                {
+                    differences+=1;
+                    println!("  diff at pos {cnt}, letter {letter}");
+                }
+                else
+                {
+                    same_chars.push(letter);
+                }
+                cnt+=1;
             }
-            else if *count == 3  &&  ! three_found 
+            if differences == 1
             {
-                println!("  THREE {letter}");
-                trice_count+=1;
-                three_found = true
+                println!("Found similar lines !!! ");
+                println!("   {line}");
+                println!("   {comp_line}");
+                //TODO: Print the list of same chars !
+                break 'outer
             }
         }
     }
-
-    println!("Twice: {twice_count}");
-    println!("Trice: {trice_count}");
-    let sum =twice_count *trice_count;
-    println!("{sum}");
-
 
 }

@@ -1,9 +1,12 @@
 use std::collections::HashMap;
+use rust_helper::input_file;
 
 pub fn run(  )
 {
     println!("p1!!");
-    let input_text = rust_helper::read_lines("src/input.txt");
+
+    let input_text = rust_helper::read_lines(
+        &rust_helper::input_file!());
 
     let mut twice_count = 0;
     let mut trice_count = 0;
@@ -49,6 +52,4 @@ pub fn run(  )
     println!("Trice: {trice_count}");
     let sum =twice_count *trice_count;
     println!("{sum}");
-
-
 }

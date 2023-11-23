@@ -4,9 +4,34 @@ use std::fs::File;
 use std::io::{BufReader, BufRead};
 use std::vec;
 
+// A samll helper for getting the wanted input file sample or real
+pub fn input_file(use_sample: bool) -> String
+{
+    if use_sample == true
+    {
+        return "src/sample_input.txt".to_string();
+    }
+    else
+    {
+        return "src/input.txt".to_string();
+    }
+}
+
+#[macro_export]
+macro_rules! input_file {
+    ($a: expr) => {
+        input_file($a)
+    };
+    () => {
+        input_file(false)
+    };
+}
 
 
 
+
+
+//base reader helper to get a array of lines
 pub fn read_lines(file_name: &str) -> Vec<String> {
     let mut str_list : Vec<String> = vec::Vec::new();
 
@@ -20,7 +45,7 @@ pub fn read_lines(file_name: &str) -> Vec<String> {
     return str_list;
 }
 
-
+//helper for converting a string list into a list of integers
 pub fn int_list ( str_list : Vec<String>) -> Vec<i32>
 {
     let mut int_list: Vec<i32> = Vec::new();

@@ -28,8 +28,30 @@ macro_rules! input_file {
 }
 
 
+//---------------
+// split helpers:
+
+fn split_line_by(string: &String, token: &str) -> Vec<String>
+{
+    let words : Vec<String> = string.split(token).map(|w| w.to_string()).collect();
+    return words;
+}
+
+fn split_array_by(strings: &Vec<String>, token: &str) -> Vec<Vec<String>> {
+    let mut result = Vec::new();
+
+    for s in strings
+    {
+        //let words: Vec<String> = s.split(token).map(|w| w.to_string()).collect();
+        let words = split_line_by(&s, token); 
+        result.push(words);
+    }
+
+    return result;
+}
 
 
+//--------------
 
 //base reader helper to get a array of lines
 pub fn read_lines(file_name: &str) -> Vec<String> {

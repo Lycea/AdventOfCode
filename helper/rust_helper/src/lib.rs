@@ -31,13 +31,13 @@ macro_rules! input_file {
 //---------------
 // split helpers:
 
-fn split_line_by(string: &String, token: &str) -> Vec<String>
+pub fn split_line_by(string: &String, token: &str) -> Vec<String>
 {
     let words : Vec<String> = string.split(token).map(|w| w.to_string()).collect();
     return words;
 }
 
-fn split_array_by(strings: &Vec<String>, token: &str) -> Vec<Vec<String>> {
+pub fn split_array_by(strings: &Vec<String>, token: &str) -> Vec<Vec<String>> {
     let mut result = Vec::new();
 
     for s in strings
